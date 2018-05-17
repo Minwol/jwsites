@@ -1,5 +1,6 @@
 package com.minwolinc.apps.jwsites
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -8,19 +9,49 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    val url_jw = "https://www.jw.org"
+    val url_jw_wol = "http://wol.jw.org"
+    val url_jw_tv = "https://tv.jw.org"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        //WebView
+
+        val settings = webView.settings
+
+        settings.setAppCacheEnabled(true)
+        settings.cacheMode=WebSettings.LOAD_DEFAULT
+        settings.setAppCachePath(cacheDir.path)
+        settings.setSupportZoom(true)
+
+        webView.webViewClient= object : WebViewClient() {
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                fab.isEnabled=webView.canGoBack()
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                fab.isEnabled=webView.canGoBack()
+            }
+        }
+
+
+
+        fab.setOnClickListener {
+            if (webView.canGoBack()) {
+                webView.goBack()
+            }
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -29,15 +60,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        webView.loadUrl(url_jw)
     }
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            webView.goBack()
+            fab.callOnClick()
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
