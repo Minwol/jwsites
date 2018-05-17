@@ -1,9 +1,15 @@
 <resources>
-    <string name="app_name">jwsites</string>
+    <string name="app_name">JW Sites</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">JW Sites</string>
+    <string name="nav_header_subtitle">Choose a JW website</string>
+    <string name="nav_header_desc">JW Sites</string>
     <string name="action_settings">Settings</string>
+    <string name="url_jw">https://www.jw.org</string>
+    <string name="url_jw_wol">http://wol.jw.org</string>
+    <string name="url_jw_tv">https://tv.jw.org</string>
+    <string name="nav_jw">JW Site</string>
+    <string name="nav_jw_wol">Watchtower Online Library</string>
+    <string name="nav_jw_tv">JW Broadcasting</string>
 </resources>
