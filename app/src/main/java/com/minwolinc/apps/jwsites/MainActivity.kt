@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val settings = webView.settings
 
+        settings.javaScriptEnabled = true
         settings.setAppCacheEnabled(true)
         settings.cacheMode=WebSettings.LOAD_DEFAULT
         settings.setAppCachePath(cacheDir.path)
