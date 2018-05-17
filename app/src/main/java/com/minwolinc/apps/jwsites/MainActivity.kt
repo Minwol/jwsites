@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBar
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        var actionbar :ActionBar? = supportActionBar
+        actionbar?.hide()
 
         //WebView
 
@@ -95,12 +98,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_jw -> {
                 // Main Site
+                webView.loadUrl(url_jw)
             }
             R.id.nav_jw_wol -> {
                 // Online Library
+                webView.loadUrl(url_jw_wol)
             }
             R.id.nav_jw_tv -> {
                 // Broadcasting
+                webView.loadUrl(url_jw_tv)
             }
         }
 
